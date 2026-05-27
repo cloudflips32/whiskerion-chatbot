@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+.oswald-bold {
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: 2.4px;
+    font-style: normal;
+}
+
+.epic-cat-portrait {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    height: 95%;
+    z-index: 1;
+    /* Elevated above space background */
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.cat-eye {
+    fill: none;
+    animation: pulseEyes 2.5s ease-in-out infinite;
+}
+
+.chat-container {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+    /* Elevated above cat portrait */
+    background-color: rgba(22, 33, 62, 0.65);
+    /* More transparent to see the animated stars */
+}
+
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 80%;
+    line-height: 1.5;
+    word-wrap: break-word;
+    color: #f0f0f0;
+}
+
+.user-message {
+    background-color: var(--user-bubble-bg);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: var(--bot-bubble-bg);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.loading-message {
+    font-style: italic;
+    color: #aaa;
+    align-self: flex-start;
+}
+
+.form-container {
+    position: relative;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.55);
+    /* Clean contrast */
+    z-index: 2;
+    /* Elevated above cat portrait */
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.chat-input {
+    flex-grow: 1;
+    padding: 12px;
+    border-radius: 20px;
+    border: 2px solid var(--text-color);
+    background-color: var(--input-bg);
+    color: white;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+.chat-input:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--text-color);
+}
+
+.submit-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--button-bg);
+    color: var(--container-bg);
+    font-family: var(--font-family);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover,
+.submit-button:disabled {
+    background-color: #ff718e;
+}
+
+.submit-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#root-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    max-height: 90vh;
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid;
+    position: relative;
+    z-index: 2;
+    /* Float above the global background */
+    animation: pulseBorder 4s ease-in-out infinite;
+}
+
+/* --- Animated Space Background --- */
+.space-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #150d2a 0%, #090514 70%, #020105 100%);
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: 0 0 4px #ffffff;
+    animation: pulseStar infinite ease-in-out;
+}
+
+@keyframes pulseStar {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.35;
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Flying Meteors / Shooting Stars */
+.meteor {
+    position: absolute;
+    width: 160px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(233, 69, 96, 0.6) 40%, rgba(233, 69, 96, 0) 100%);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px rgba(233, 69, 96, 0.7));
+    opacity: 0;
+    transform: rotate(-45deg);
+    animation: flyMeteor infinite linear;
+}
+
+@keyframes flyMeteor {
+    0% {
+        transform: translate3d(100vw, -100px, 0) rotate(-45deg);
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    6% {
+        transform: translate3d(-200px, calc(100vh + 100px), 0) rotate(-45deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate3d(-200px, calc(100vh + 100px), 0) rotate(-45deg);
+        opacity: 0;
+    }
+}
