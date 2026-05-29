@@ -1,11 +1,9 @@
 :root {
     --background-color: #1a1a2e;
-    --container-bg: #16213e;
     --user-bubble-bg: #0f3460;
     --bot-bubble-bg: #533483;
     --text-color: #e94560;
     --input-bg: #1f4068;
-    --button-bg: #e94560;
     --font-family: 'Courier New', Courier, monospace;
 }
 
@@ -27,36 +25,22 @@ body {
     overflow: hidden;
 }
 
-@keyframes pulseBorder {
-    0% {
-        border-color: #00bfff; /* Deep Sky Blue */
-        box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
-    }
-    50% {
-        border-color: #32cd32; /* Lime Green */
-        box-shadow: 0 0 20px rgba(50, 205, 50, 0.4);
-    }
-    100% {
-        border-color: #00bfff; /* Deep Sky Blue */
-        box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
-    }
-}
 
 @keyframes pulseEyes {
     0% {
-        stroke: #00bfff;
+        stroke: #e94560;
         stroke-width: 5px;
-        filter: drop-shadow(0 0 10px #00bfff);
+        filter: drop-shadow(0 0 8px rgba(233, 69, 96, 0.7));
     }
     50% {
-        stroke: #32cd32;
-        stroke-width: 7px;
-        filter: drop-shadow(0 0 15px #32cd32);
+        stroke: #ff6b00;
+        stroke-width: 6px;
+        filter: drop-shadow(0 0 14px rgba(255, 107, 0, 0.9));
     }
     100% {
-        stroke: #00bfff;
+        stroke: #e94560;
         stroke-width: 5px;
-        filter: drop-shadow(0 0 10px #00bfff);
+        filter: drop-shadow(0 0 8px rgba(233, 69, 96, 0.7));
     }
 }
 
