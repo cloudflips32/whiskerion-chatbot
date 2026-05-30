@@ -19,7 +19,11 @@
     z-index: 1;
     /* Elevated above space background */
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 1;
+    object-fit: cover;
+    /* Soften the edges to seamlessly blend with the background */
+    mask-image: radial-gradient(ellipse at center, white 60%, transparent 98%);
+    -webkit-mask-image: radial-gradient(ellipse at center, white 60%, transparent 98%);
 }
 
 .cat-eye {
@@ -355,9 +359,54 @@
     height: 100vh;
     z-index: 0;
     overflow: hidden;
-    background: radial-gradient(circle at center, #150d2a 0%, #090514 70%, #020105 100%);
+    /* Realistic deep space nebula to seamlessly blend with the video */
+    background: 
+        radial-gradient(ellipse at 15% 20%, rgba(60, 30, 110, 0.25) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 80%, rgba(45, 25, 95, 0.3) 0%, transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(30, 20, 60, 0.5) 0%, transparent 80%),
+        #110e20;
     pointer-events: none;
 }
+
+/* East Middle Glow */
+.space-background::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% + min(40vw, 350px));
+    width: 8.5vw;
+    height: 35vw;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 8%, transparent 20%);
+    z-index: 1;
+    animation: corePulse 4s ease-in-out infinite alternate;
+}
+
+/* South-Southwest Glow on West side */
+.space-background::after {
+    content: '';
+    position: absolute;
+    top: calc(80% - 100px);
+    left: calc(50% - min(40vw, 350px));
+    width: 8.5vw;
+    height: 35vw;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 8%, transparent 20%);
+    z-index: 1;
+    animation: corePulse 5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes corePulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+}
+
 
 .star {
     position: absolute;
@@ -366,6 +415,7 @@
     opacity: 0.8;
     box-shadow: 0 0 4px #ffffff;
     animation: pulseStar infinite ease-in-out;
+    z-index: 3;
 }
 
 @keyframes pulseStar {
@@ -395,6 +445,7 @@
     opacity: 0;
     transform: rotate(-45deg);
     animation: flyMeteor infinite linear;
+    z-index: 3;
 }
 
 @keyframes flyMeteor {

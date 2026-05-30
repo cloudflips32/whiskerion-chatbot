@@ -543,67 +543,7 @@ export function ChatPage() {
         <div id="root-inner">
 
 
-            <svg className="epic-cat-portrait" viewBox="0 180 800 600" preserveAspectRatio="xMidYMax meet">
-                <defs>
-                    {/* Outer Layer: Deep Red-Orange Gradient */}
-                    <linearGradient id="fire-outer-grad" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#1a1a2e" stopOpacity="0.2" />
-                        <stop offset="30%" stopColor="#d00000" stopOpacity="0.9" />
-                        <stop offset="75%" stopColor="#ff4800" stopOpacity="0.95" />
-                        <stop offset="100%" stopColor="#ffaa00" stopOpacity="1" />
-                    </linearGradient>
-
-                    {/* Middle Layer: Orange-Yellow Gradient */}
-                    <linearGradient id="fire-mid-grad" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#d00000" stopOpacity="0.4" />
-                        <stop offset="25%" stopColor="#ff4800" stopOpacity="0.9" />
-                        <stop offset="70%" stopColor="#ffb700" stopOpacity="0.95" />
-                        <stop offset="100%" stopColor="#ffea00" stopOpacity="1" />
-                    </linearGradient>
-
-                    {/* Inner Layer: Yellow-White Gradient */}
-                    <linearGradient id="fire-inner-grad" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#ff4800" stopOpacity="0.3" />
-                        <stop offset="30%" stopColor="#ffea00" stopOpacity="0.95" />
-                        <stop offset="80%" stopColor="#fffae0" stopOpacity="1" />
-                        <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-                    </linearGradient>
-
-                    <radialGradient id="flame-glow-grad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#ff4800" stopOpacity="0.6" />
-                        <stop offset="45%" stopColor="#d00000" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#1a1a2e" stopOpacity="0" />
-                    </radialGradient>
-                </defs>
-
-
-
-
-                {/* Animated Head Group */}
-                <g className="animated-head-group">
-                    {/* Restored Giant Cat Head Silhouette */}
-                    <path d="M400,600 C300,600 180,550 130,450 C120,420 135,380 140,350 C100,280 150,150 250,100 C270,90 290,120 300,150 L350,140 L400,110 L450,140 L500,150 C510,120 530,90 550,100 C650,150 700,280 660,350 C665,380 680,420 670,450 C620,550 500,600 400,600 Z" className="fiery-border-pulse" />
-
-                    {/* Glowing Inner Ears */}
-                    <InnerEars />
-
-                    {/* Multi-layered blazing fire behind both eyes */}
-                    <CosmicFlames cx={330} cy={310} />
-                    <CosmicFlames cx={470} cy={310} />
-
-                    <g className="cat-eyes">
-                        <ellipse className="cat-eye" cx={330} cy={300} rx={50} ry={30} />
-                        <ellipse className="cat-eye" cx={470} cy={300} rx={50} ry={30} />
-                    </g>
-
-                    {/* Glowing Nose */}
-                    <GlowingNose />
-
-                    {/* Swaying Fiery Whiskers */}
-                    <FieryWhiskers cx={360} cy={363} dir="left" />
-                    <FieryWhiskers cx={440} cy={363} dir="right" />
-                </g>
-            </svg>
+            <video className="epic-cat-portrait" src="/whiskerion.mp4" autoPlay loop muted playsInline></video>
 
             <div className="chat-container" ref={chatContainerRef}>
                 {messages.map((msg, index) => (
