@@ -11,7 +11,8 @@ Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat
 ## ✨ Features
 
 - 🌌 **Animated Cosmic Backdrop:** A custom, dynamically generated starfield and meteor shower animated natively in CSS for a deep-space feel.
-- 🐈 **Glowing Interactive Silhouette:** A beautifully styled SVG feline portrait that anchors the interface with neon accents.
+- 🐈 **Animated Fiery Feline:** A visually stunning SVG portrait of Whiskerion, featuring dynamic CSS-animated cosmic flames, swaying whiskers, and glowing inner ears that bring the persona to life.
+- 🎙️ **ElevenLabs Voice Integration:** Whiskerion's booming cosmic voice is brought to life using the ElevenLabs API, complete with a typewriter text effect perfectly synchronized to the audio stream.
 - 🧠 **Google Gemini 2.5 Flash Lite:** Integration using the latest `@google/genai` SDK, configured with specialized system instructions to deliver a fully-immersive persona.
 - 🎭 **Programmatic Persona Enhancements:** Dynamic prefixing and suffixing to wrap AI responses with immersive, randomized cat flavor.
 - ⚡ **State-of-the-Art Build Tooling:** Lightning-fast builds and Hot Module Replacement (HMR) powered by Vite and React Compiler.
@@ -49,9 +50,11 @@ Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended) and 
    ```
 
 3. **Set Up Environment Variables:**
-   Create a `.env.local` file in the root directory of the project and add your Gemini API key:
+   Create a `.env.local` file in the root directory of the project and add your Gemini API key and ElevenLabs credentials:
    ```env
    VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
+   VITE_ELEVENLABS_API_KEY=your_actual_elevenlabs_api_key_here
+   VITE_ELEVENLABS_VOICE_ID=your_elevenlabs_voice_id_here
    ```
 
 ### 💻 Running Locally
@@ -113,9 +116,6 @@ Every response is decorated with random epic prefixes like *"From the ninth dime
 ## 🗺️ Roadmap & Planned Implementations
 
 To elevate Whiskerion into a truly multi-sensory, multi-dimensional entity, we are planning the following integrations:
-
-### 🎙️ ElevenLabs (Character Voice)
-Bring Whiskerion’s wise, booming, and slightly aloof decrees to life! We plan to integrate **ElevenLabs** to dynamically generate and stream a custom-crafted, epic cosmic voice for every chat response, providing complete auditory immersion.
 
 ### 🖼️ Nano Banana 2 (Dynamic Whiskerion Image Generation)
 Visualize the cosmic feline! Using **Nano Banana2**, Whiskerion will dynamically generate unique cosmic images representing his current form or scenario. 
