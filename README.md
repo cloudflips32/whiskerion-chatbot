@@ -6,12 +6,16 @@
 
 Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat from another dimension. Ask it anything, and prepare to receive responses steeped in grandeur, cosmic wisdom, and feline superiority!
 
+<p align="center">
+  <img src="public/whiskerion-preview.png" alt="Whiskerion the Cosmic Interface" />
+</p>
+
 ---
 
 ## ✨ Features
 
-- 🌌 **Animated Cosmic Backdrop:** A custom, dynamically generated starfield and meteor shower animated natively in CSS for a deep-space feel.
-- 🐈 **Animated Fiery Feline:** A visually stunning SVG portrait of Whiskerion, featuring dynamic CSS-animated cosmic flames, swaying whiskers, and glowing inner ears that bring the persona to life.
+- 🌌 **Seamless Nebula Backdrop:** A dynamically generated starfield and meteor shower intertwined with a complex, multi-layered deep-space nebula background that organically extends the boundaries of Whiskerion's galaxy.
+- 🐈 **High-Fidelity Cosmic Video Integration:** A visually stunning looping video portrait of Whiskerion perfectly blended into the application using soft CSS masks and custom dynamic light auras.
 - 🎙️ **ElevenLabs Voice Integration:** Whiskerion's booming cosmic voice is brought to life using the ElevenLabs API, complete with a typewriter text effect perfectly synchronized to the audio stream.
 - 🧠 **Google Gemini 2.5 Flash Lite:** Integration using the latest `@google/genai` SDK, configured with specialized system instructions to deliver a fully-immersive persona.
 - 🎭 **Programmatic Persona Enhancements:** Dynamic prefixing and suffixing to wrap AI responses with immersive, randomized cat flavor.
