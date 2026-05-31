@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI, Chat } from "@google/genai";
+import { LoadingCat } from './components/LoadingCat';
+import { ChatInput } from './components/ChatInput';
+import { ChatMessage, type MessageType } from './components/ChatMessage';
 import './App.css';
 
 // Safely access Vite environment variables or Node/fallback variables
@@ -32,118 +35,14 @@ const catSuffixes = [
     " Purrfectly logical."
 ];
 
-type Message = {
-    sender: 'user' | 'bot';
-    text: string;
-};
-
 function getRandomItem<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
-}
-
-
-function TypewriterText({
-    text,
-    activeAudio,
-    speechCharIndex,
-    syncMode
-}: {
-    text: string;
-    activeAudio: HTMLAudioElement | null;
-    speechCharIndex: number | null;
-    syncMode: boolean;
-}) {
-    const [displayedText, setDisplayedText] = useState('');
-    const [isDone, setIsDone] = useState(false);
-
-    // Effect for ElevenLabs / HTML5 Audio element sync
-    useEffect(() => {
-        if (!activeAudio) return;
-
-        setIsDone(false);
-
-        const updateProgress = () => {
-            const duration = activeAudio.duration;
-            const currentTime = activeAudio.currentTime;
-
-            if (duration && duration > 0) {
-                // Map current time fraction to string index with 1.1x speed multiplier
-                const ratio = Math.min(1, (currentTime / duration) * 1.4);
-                const charIndex = Math.floor(ratio * text.length);
-                setDisplayedText(text.slice(0, charIndex));
-            } else {
-                setDisplayedText('');
-            }
-        };
-
-        const handleEnded = () => {
-            setDisplayedText(text);
-            setIsDone(true);
-        };
-
-        // Listen for timeupdate and metadata loading events to synchronize typing
-        activeAudio.addEventListener('timeupdate', updateProgress);
-        activeAudio.addEventListener('loadedmetadata', updateProgress);
-        activeAudio.addEventListener('durationchange', updateProgress);
-        activeAudio.addEventListener('ended', handleEnded);
-
-        // Also call once initially
-        updateProgress();
-
-        return () => {
-            activeAudio.removeEventListener('timeupdate', updateProgress);
-            activeAudio.removeEventListener('loadedmetadata', updateProgress);
-            activeAudio.removeEventListener('durationchange', updateProgress);
-            activeAudio.removeEventListener('ended', handleEnded);
-        };
-    }, [text, activeAudio]);
-
-    // Effect for Web Speech synthesis fallback index sync
-    useEffect(() => {
-        if (activeAudio || speechCharIndex === null) return;
-
-        setIsDone(false);
-        // Find the next word boundary or space to display up to
-        const nextSpace = text.indexOf(' ', speechCharIndex);
-        const endChar = nextSpace === -1 ? text.length : nextSpace;
-
-        setDisplayedText(text.slice(0, endChar));
-
-        if (endChar >= text.length) {
-            setIsDone(true);
-        }
-    }, [text, activeAudio, speechCharIndex]);
-
-    // Fallback typing effect if no audio/speech synthesis active (only when not in syncMode)
-    useEffect(() => {
-        if (syncMode || activeAudio || speechCharIndex !== null) return;
-
-        let index = 0;
-        setIsDone(false);
-        const interval = setInterval(() => {
-            setDisplayedText(text.slice(0, index + 1));
-            index++;
-            if (index >= text.length) {
-                clearInterval(interval);
-                setIsDone(true);
-            }
-        }, 12);
-
-        return () => clearInterval(interval);
-    }, [text, activeAudio, speechCharIndex, syncMode]);
-
-    return (
-        <span>
-            {displayedText}
-            {!isDone && (displayedText.length > 0 || !syncMode) && <span className="typewriter-cursor">|</span>}
-        </span>
-    );
 }
 
 let whiskerionIntroPlayed = false;
 
 export function ChatPage() {
-    const [messages, setMessages] = useState<Message[]>([
+    const [messages, setMessages] = useState<MessageType[]>([
         { sender: 'bot', text: 'Greetings, mortal. I am Whiskerion the Cosmic. What knowledge do you seek?' }
     ]);
     const [isLoading, setIsLoading] = useState(false);
@@ -400,70 +299,25 @@ export function ChatPage() {
 
             <div className="chat-container" ref={chatContainerRef}>
                 {messages.map((msg, index) => (
-                    <div
+                    <ChatMessage
                         key={index}
-                        className={`message oswald-bold ${msg.sender}-message`}
-                        role="log"
-                        aria-live="polite"
-                    >
-                        {msg.sender === 'bot' && index === messages.length - 1 ? (
-                            <TypewriterText
-                                text={msg.text}
-                                activeAudio={messages.length > 1 ? activeAudio : null}
-                                speechCharIndex={messages.length > 1 ? speechCharIndex : null}
-                                syncMode={messages.length > 1}
-                            />
-                        ) : (
-                            msg.text
-                        )}
-                    </div>
+                        msg={msg}
+                        isLastMessage={index === messages.length - 1}
+                        activeAudio={activeAudio}
+                        speechCharIndex={speechCharIndex}
+                        hasMultipleMessages={messages.length > 1}
+                    />
                 ))}
-                {isLoading && (
-                    <div className="message bot-message loading-message-container">
-                        <div className="running-cat-wrapper">
-                            <svg className="running-cat" viewBox="0 0 100 40" aria-hidden="true">
-                                <path d="M 33,20 C 33,26 31,30 27,33" className="cat-leg leg-bl" />
-                                <path d="M 58,20 C 58,26 56,30 52,33" className="cat-leg leg-fl" />
-                                <path d="M 30,16 C 22,12 16,24 10,14" className="cat-tail" />
-                                <path d="M 30,15 Q 47,12 64,15 L 61,23 Q 47,25 32,23 Z" className="cat-torso" />
-                                <g className="cat-head-group">
-                                    <ellipse cx="68" cy="14" rx="7" ry="6" className="cat-face" />
-                                    <polygon points="63,9 65,3 69,9" className="cat-ear" />
-                                    <polygon points="71,9 73,3 77,9" className="cat-ear" />
-                                    <circle cx="67" cy="13" r="1.2" fill="#ffea00" />
-                                    <circle cx="71" cy="13" r="1.2" fill="#ffea00" />
-                                </g>
-                                <path d="M 37,20 C 37,26 39,30 43,33" className="cat-leg leg-br" />
-                                <path d="M 62,20 C 62,26 64,30 68,33" className="cat-leg leg-fr" />
-                            </svg>
-                        </div>
-                        <span className="loading-text">Whiskerion is pondering the cosmic strings...</span>
-                    </div>
-                )}
+                {isLoading && <LoadingCat />}
             </div>
 
-            <div className="form-container">
-                <form className="chat-form" onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        className="chat-input"
-                        placeholder="Seek, and find..."
-                        aria-label="Chat input"
-                        value={inputVal}
-                        onChange={(e) => setInputVal(e.target.value)}
-                        disabled={isButtonDisabled}
-                        ref={inputRef}
-                    />
-                    <button
-                        type="submit"
-                        className="submit-button"
-                        disabled={isButtonDisabled}
-                        aria-label="Send message"
-                    >
-                        Send
-                    </button>
-                </form>
-            </div>
+            <ChatInput
+                inputVal={inputVal}
+                setInputVal={setInputVal}
+                handleSubmit={handleSubmit}
+                isButtonDisabled={isButtonDisabled}
+                inputRef={inputRef}
+            />
         </div>
     );
 }

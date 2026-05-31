@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Inscriptional+Pahlavi&display=swap');
 
 .oswald-bold {
     font-family: "Oswald", sans-serif;
@@ -173,6 +174,12 @@
     color: #aaa;
     line-height: 1.5;
     animation: loadingPulse 1.5s infinite ease-in-out alternate;
+}
+
+.noto-sans-inscriptional-pahlavi-regular {
+    font-family: "Noto Sans Inscriptional Pahlavi", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 @keyframes legSwingForward {
@@ -360,7 +367,7 @@
     z-index: 0;
     overflow: hidden;
     /* Realistic deep space nebula to seamlessly blend with the video */
-    background: 
+    background:
         radial-gradient(ellipse at 15% 20%, rgba(60, 30, 110, 0.25) 0%, transparent 45%),
         radial-gradient(ellipse at 85% 80%, rgba(45, 25, 95, 0.3) 0%, transparent 55%),
         radial-gradient(circle at 50% 50%, rgba(30, 20, 60, 0.5) 0%, transparent 80%),
@@ -401,6 +408,7 @@
         transform: translate(-50%, -50%) scale(0.95);
         opacity: 0.8;
     }
+
     100% {
         transform: translate(-50%, -50%) scale(1.1);
         opacity: 1;
