@@ -22,7 +22,10 @@ export function ChatInput({
                     placeholder="Seek, and find..."
                     aria-label="Chat input"
                     value={inputVal}
-                    onChange={(e) => setInputVal(e.target.value)}
+                    onChange={(e) => {
+                        const sanitizedValue = e.target.value.replace(/[<>{}[\]$&]/g, '');
+                        setInputVal(sanitizedValue);
+                    }}
                     disabled={isButtonDisabled}
                     ref={inputRef}
                 />
