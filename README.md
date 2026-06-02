@@ -21,6 +21,7 @@ Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat
 - 🎭 **Programmatic Persona Enhancements:** Dynamic prefixing and suffixing to wrap AI responses with immersive, randomized cat flavor.
 - ⚡ **State-of-the-Art Build Tooling:** Lightning-fast builds and Hot Module Replacement (HMR) powered by Vite and React Compiler.
 - 💅 **Rich Glassmorphism UI:** Floating visual container featuring sleek borders, soft backdrops, and satisfying responsive layouts.
+- 🧱 **Modular Component Architecture:** Clean, maintainable codebase with reusable React components (e.g., `ChatInput`, `ChatMessage`, `TypewriterText`) and robust input validation for enhanced security.
 
 ---
 
@@ -75,10 +76,11 @@ Open your browser and navigate to the local URL (usually `http://localhost:5173`
 
 ```text
 whiskerion-chatbot/
-├── public/                 # Static assets (favicons, public images)
+├── public/                 # Static assets (favicons, public images, media)
 ├── src/
 │   ├── assets/             # Raw image/vector assets
-│   ├── App.tsx             # Main layout, cosmic stars/meteors generator
+│   ├── components/         # Reusable UI components (ChatInput, ChatMessage, StarryBackground, etc.)
+│   ├── App.tsx             # Main application layout and routing
 │   ├── App.css             # Main styling, keyframe animations, glassmorphism
 │   ├── ChatPage.tsx        # Chat session manager & Gemini SDK connection
 │   ├── index.css           # Global Tailwind entries & foundational classes
