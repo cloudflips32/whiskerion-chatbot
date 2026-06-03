@@ -3,7 +3,7 @@ import { GoogleGenAI, Chat } from "@google/genai";
 import { Loader } from '../components/Loader';
 import { ChatInput } from '../components/ChatInput';
 import { ChatMessage, type MessageType } from '../components/ChatMessage';
-import './App.css';
+import '../App.css';
 
 // Safely access Vite environment variables or Node/fallback variables
 const apiKey = String(import.meta.env.VITE_GEMINI_API_KEY || "") ||
