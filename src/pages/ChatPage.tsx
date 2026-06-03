@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI, Chat } from "@google/genai";
-import { LoadingCat } from './components/LoadingCat';
-import { ChatInput } from './components/ChatInput';
-import { ChatMessage, type MessageType } from './components/ChatMessage';
+import { LoadingCat } from '../components/LoadingCat';
+import { ChatInput } from '../components/ChatInput';
+import { ChatMessage, type MessageType } from '../components/ChatMessage';
 import './App.css';
 
 // Safely access Vite environment variables or Node/fallback variables
