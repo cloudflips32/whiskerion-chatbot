@@ -1,4 +1,4 @@
-import { ChatPage } from './ChatPage';
+import { ChatPage } from './pages/ChatPage';
 import { StarryBackground } from './components/StarryBackground';
 import './App.css';
 
