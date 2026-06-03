@@ -1,4 +1,4 @@
-export function LoadingCat() {
+export function Loader() {
     return (
         <div className="message bot-message loading-message-container">
             <div className="typing-indicator">

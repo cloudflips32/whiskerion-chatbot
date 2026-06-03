@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI, Chat } from "@google/genai";
-import { LoadingCat } from '../components/LoadingCat';
+import { Loader } from '../components/Loader';
 import { ChatInput } from '../components/ChatInput';
 import { ChatMessage, type MessageType } from '../components/ChatMessage';
 import './App.css';
@@ -308,7 +308,7 @@ export function ChatPage() {
                         hasMultipleMessages={messages.length > 1}
                     />
                 ))}
-                {isLoading && <LoadingCat />}
+                {isLoading && <Loader />}
             </div>
 
             <ChatInput
