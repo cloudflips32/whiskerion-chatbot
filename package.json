@@ -12,6 +12,7 @@
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.49.1",
     "@google/genai": "^2.6.0",
+    "@hexclave/react": "^1.0.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
