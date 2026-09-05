@@ -27,6 +27,25 @@
     -webkit-mask-image: radial-gradient(ellipse at center, white 60%, transparent 98%);
 }
 
+.epic-cat-eyes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+    max-width: 260px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    z-index: 1;
+    pointer-events: none;
+    object-fit: cover;
+    opacity: 0.85;
+    border-radius: 50%;
+    /* Blend the eyes into the portrait background */
+    mask-image: radial-gradient(ellipse at center, white 70%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse at center, white 70%, transparent 95%);
+}
+
 .cat-eye {
     fill: none;
     animation: pulseEyes 2.5s ease-in-out infinite;

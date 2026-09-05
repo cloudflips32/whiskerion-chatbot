@@ -121,10 +121,29 @@ Every response is decorated with random epic prefixes like *"From the ninth dime
 
 ## 🗺️ Roadmap & Planned Implementations
 
+<p align="center">
+  <img src="public/workflow-diagram.png" alt="Whiskerion Cosmic Workflow" />
+</p>
+
 To elevate Whiskerion into a truly multi-sensory, multi-dimensional entity, we are planning the following integrations:
 
 ### 🖼️ Nano Banana 2 (Dynamic Whiskerion Image Generation)
 Visualize the cosmic feline! Using **Nano Banana2**, Whiskerion will dynamically generate unique cosmic images representing his current form or scenario. 
 - **Context-Aware Visuals:** Generation will be uniquely driven by both your input prompt and Whiskerion's determined response output.
 - **Dimensional Art:** Witness Whiskerion in different dimensions, stellar outfits, and celestial nebulae depending on the conversation's cosmic state!
+
+### 🔐 Hexclave Authentication (User Login)
+Secure cosmic identity! Setting up user login through **Hexclave** to allow travelers of the cosmos to create accounts, save their sessions, and preserve their user profiles across dimensions.
+
+### 💳 Stripe Integration (Premium Tiers)
+Support the cosmic voyage! Integration with **Stripe** to handle secure payments, enabling users to subscribe to premium tiers for unlimited voice generation, exclusive cosmic themes, and advanced model interactions.
+
+### 🗂️ Side Panel & User Navigation
+A streamlined sidebar interface containing custom options, user details, navigation shortcuts, and direct controls to customize your conversation flow.
+
+### 📜 Scrollable Cosmic Query History
+Never lose track of your galactic wisdom! A scrollable sidebar dialogue filled with a complete history of the user's cosmic queries, allowing easy retrieval of past chat threads with Whiskerion.
+
+### ⚙️ Settings Page
+A dedicated configuration hub to manage user preferences, ElevenLabs voice settings, toggle stellar animations, and adjust API configurations.
 
