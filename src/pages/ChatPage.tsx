@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI, Chat } from "@google/genai";
 import { ChatInput } from '../components/ChatInput';
 import { MessageList } from '../components/MessageList';
 import { BotPortraitVideo } from '../components/BotPortraitVideo';
@@ -8,11 +7,14 @@ import { addCatFlair } from '../components/catFlair';
 import type { MessageType } from '../components/ChatMessage';
 import '../App.css';
 
-// Safely access Vite environment variables or Node/fallback variables
-const apiKey = String(import.meta.env.VITE_GEMINI_API_KEY || "") ||
-    (typeof process !== 'undefined' ? process.env.API_KEY || "" : "");
+const env = import.meta.env;
+// Safely access Vite environment variables
+const apiKey = `${env.VITE_SPEECH_API_KEY}`;
 
-const ai = new GoogleGenAI({ apiKey });
+const SPEECH_URL = `${env.VITE_SPEECH_URL}`;
+const MODEL = `${env.VITE_MODEL}`;
+
+const SYSTEM_PROMPT = 'You are an epic, wise, and slightly aloof cat from another dimension. Your name is Whiskerion the Cosmic. Speak with grandiosity and cosmic flair, but keep your core answers helpful and concise. Do not add any greetings or sign-offs, as they will be added programmatically. Answers should be 70 words or less';
 
 export function ChatPage() {
     const [messages, setMessages] = useState<MessageType[]>([
@@ -22,27 +24,18 @@ export function ChatPage() {
     const [inputVal, setInputVal] = useState('');
     const [isChatReady, setIsChatReady] = useState(false);
 
-    const chatRef = useRef<Chat | null>(null);
+    const historyRef = useRef<{ role: 'user' | 'assistant'; content: string }[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const { activeAudio, speechCharIndex, speakText } = useSpeechSynthesis();
 
-    // Initialize Gemini Chat session on component mount
+    // Verify connectivity on component mount
     useEffect(() => {
-        try {
-            const chatSession = ai.chats.create({
-                model: 'gemini-2.5-flash-lite',
-                config: {
-                    systemInstruction: 'You are an epic, wise, and slightly aloof cat from another dimension. Your name is Whiskerion the Cosmic. Speak with grandiosity and cosmic flair, but keep your core answers helpful and concise. Do not add any greetings or sign-offs, as they will be added programmatically. Answers should be 70 words or less',
-                },
-            });
-            chatRef.current = chatSession;
-            setIsChatReady(true);
-        } catch (e) {
-            console.error("Could not connect to the cosmic realm:", e);
+        setIsChatReady(Boolean(apiKey));
+        if (!apiKey) {
             setMessages([
-                { sender: 'bot', text: 'Could not connect to the cosmic realm. Check your API key.' }
+                { sender: 'bot', text: 'Could not connect to the cosmic realm. Check your Speech API key.' }
             ]);
         }
     }, []);
@@ -65,16 +58,38 @@ export function ChatPage() {
         event.preventDefault();
         const userInput = inputVal.trim();
 
-        if (!userInput || isLoading || !chatRef.current) return;
+        if (!userInput || isLoading || !isChatReady) return;
 
         // Append user's message to message history
         setMessages(prev => [...prev, { sender: 'user', text: userInput }]);
         setIsLoading(true);
         setInputVal('');
 
+        historyRef.current.push({ role: 'user', content: userInput });
+
         try {
-            const response = await chatRef.current.sendMessage({ message: userInput });
-            const botText = (response.text || '').replace(/\*/g, '');
+            const response = await fetch(SPEECH_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                },
+                body: JSON.stringify({
+                    model: MODEL,
+                    messages: [
+                        { role: 'system', content: SYSTEM_PROMPT },
+                        ...historyRef.current,
+                    ],
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Speech API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const botText = (data.choices?.[0]?.message?.content || '').replace(/\*/g, '');
+            historyRef.current.push({ role: 'assistant', content: botText });
             const fullText = addCatFlair(botText);
 
             setMessages(prev => [
@@ -83,7 +98,7 @@ export function ChatPage() {
             ]);
             speakText(fullText);
         } catch (error) {
-            console.error("Error calling Gemini API:", error);
+            console.error("Error calling Speech API:", error);
             const errorMsg = 'The cosmic connection is frayed... Try again.';
             setMessages(prev => [
                 ...prev,

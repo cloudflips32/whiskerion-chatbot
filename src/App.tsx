@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { ChatPage } from './pages/ChatPage';
-import AdminPage from './pages/AdminPage';
 import { StarryBackground } from './components/StarryBackground';
 import './App.css';
 
@@ -15,19 +14,13 @@ function App() {
         return () => window.removeEventListener('hashchange', handleHashChange);
     }, []);
 
-    const isAdmin = currentRoute === '#admin' || currentRoute === '#/admin';
-
     return (
         <>
             {/* Full-screen global animated space background */}
             <StarryBackground />
 
-            {/* Render views based on route */}
-            {isAdmin ? (
-                <AdminPage />
-            ) : (
-                <ChatPage />
-            )}
+            {/* Render the chat view */}
+            <ChatPage />
         </>
     );
 }

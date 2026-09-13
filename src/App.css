@@ -63,7 +63,7 @@
     /* Elevated above cat portrait */
     background-color: rgba(22, 33, 62, 0.65);
     /* More transparent to see the animated stars */
-    opacity: .6;
+    opacity: .8;
 }
 
 .message {

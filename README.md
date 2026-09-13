@@ -2,7 +2,7 @@
 
 > *"By the whisker of the cosmos... From the ninth dimension of my ninth life, I decree that this is the ultimate feline chat application."*
 
-**Whiskerion the Cosmic** is a stunning, high-fidelity chat interface powered by **Google Gemini AI** (`gemini-2.5-flash-lite`) and built with a modern frontend stack (**React 19**, **TypeScript**, **Vite**, and **Tailwind CSS v4**). 
+**Whiskerion the Cosmic** is a stunning, high-fidelity chat interface powered by **Elevenlabs** and built with a modern frontend stack (**React 19**, **TypeScript**, **Vite**, and **Tailwind CSS v4**). 
 
 Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat from another dimension. Ask it anything, and prepare to receive responses steeped in grandeur, cosmic wisdom, and feline superiority!
 
@@ -17,7 +17,7 @@ Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat
 - 🌌 **Seamless Nebula Backdrop:** A dynamically generated starfield and meteor shower intertwined with a complex, multi-layered deep-space nebula background that organically extends the boundaries of Whiskerion's galaxy.
 - 🐈 **High-Fidelity Cosmic Video Integration:** A visually stunning looping video portrait of Whiskerion perfectly blended into the application using soft CSS masks and custom dynamic light auras.
 - 🎙️ **ElevenLabs Voice Integration:** Whiskerion's booming cosmic voice is brought to life using the ElevenLabs API, complete with a typewriter text effect perfectly synchronized to the audio stream.
-- 🧠 **Google Gemini 2.5 Flash Lite:** Integration using the latest `@google/genai` SDK, configured with specialized system instructions to deliver a fully-immersive persona.
+- 🧠 **OpenAI Speech:** Integration using the OpenAI API, configured with specialized system instructions to deliver a fully-immersive persona.
 - 🎭 **Programmatic Persona Enhancements:** Dynamic prefixing and suffixing to wrap AI responses with immersive, randomized cat flavor.
 - ⚡ **State-of-the-Art Build Tooling:** Lightning-fast builds and Hot Module Replacement (HMR) powered by Vite and React Compiler.
 - 💅 **Rich Glassmorphism UI:** Floating visual container featuring sleek borders, soft backdrops, and satisfying responsive layouts.
@@ -30,8 +30,8 @@ Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat
 - **Core Framework:** [React 19](https://react.dev/) & [TypeScript](https://www.typescriptlang.org/)
 - **Build Tool:** [Vite](https://vite.dev/) & React Compiler
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) & Vanilla CSS variables
-- **Generative AI Platform:** [Google Gen AI SDK (`@google/genai`)](https://github.com/google/generative-ai-js)
-- **Model:** `gemini-2.5-flash-lite`
+- **Generative AI Platform:** [OpenAI](https://openai.com/)
+- **Model:** `openai-o4-mini`
 
 ---
 
@@ -39,7 +39,7 @@ Whiskerion is no ordinary AI. It is an epic, wise, and slightly aloof cosmic cat
 
 ### 📋 Prerequisites
 
-Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended) and a Google Gemini API Key. You can get a free key from the [Google AI Studio](https://aistudio.google.com/).
+Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended) and an OpenAI API Key. You can get a free key from [OpenAI](https://openai.com/).
 
 ### 📦 Installation
 
@@ -55,9 +55,9 @@ Ensure you have [Node.js](https://nodejs.org/) installed (v18+ recommended) and 
    ```
 
 3. **Set Up Environment Variables:**
-   Create a `.env.local` file in the root directory of the project and add your Gemini API key and ElevenLabs credentials:
+   Create a `.env.local` file in the root directory of the project and add your API key(s) and ElevenLabs credentials:
    ```env
-   VITE_GEMINI_API_KEY=your_actual_gemini_api_key_here
+   VITE_SPEECH_API_KEY=your_actual_ai_api_key_here
    VITE_ELEVENLABS_API_KEY=your_actual_elevenlabs_api_key_here
    VITE_ELEVENLABS_VOICE_ID=your_elevenlabs_voice_id_here
    ```
@@ -82,7 +82,7 @@ whiskerion-chatbot/
 │   ├── components/         # Reusable UI components (ChatInput, ChatMessage, StarryBackground, etc.)
 │   ├── App.tsx             # Main application layout and routing
 │   ├── App.css             # Main styling, keyframe animations, glassmorphism
-│   ├── ChatPage.tsx        # Chat session manager & Gemini SDK connection
+│   ├── ChatPage.tsx        # Chat session manager & Speech API connection
 │   ├── index.css           # Global Tailwind entries & foundational classes
 │   └── main.tsx            # Application entry point
 ├── .env.local              # Local environment credentials (git-ignored)
@@ -108,11 +108,19 @@ In the project directory, you can run:
 The AI's personality is shaped using system instructions sent during the chat initialization inside `src/ChatPage.tsx`:
 
 ```typescript
-const chatSession = ai.chats.create({
-    model: 'gemini-2.5-flash-lite',
-    config: {
-        systemInstruction: 'You are an epic, wise, and slightly aloof cat from another dimension. Your name is Whiskerion the Cosmic. Speak with grandiosity and cosmic flair, but keep your core answers helpful and concise. Do not add any greetings or sign-offs, as they will be added programmatically.',
+const response = await fetch(`${env.SPEECH_URL}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
     },
+    body: JSON.stringify({
+        model: `${env.MODEL}`,
+        messages: [
+            { role: 'system', content: 'You are an epic, wise, and slightly aloof cat from another dimension. Your name is Whiskerion the Cosmic. Speak with grandiosity and cosmic flair, but keep your core answers helpful and concise. Do not add any greetings or sign-offs, as they will be added programmatically.' },
+            ...history,
+        ],
+    }),
 });
 ```
 Every response is decorated with random epic prefixes like *"From the ninth dimension of my ninth life, I decree... "* and suffixes like *" Cosmic purrs"* to deliver a highly unique interactive experience.

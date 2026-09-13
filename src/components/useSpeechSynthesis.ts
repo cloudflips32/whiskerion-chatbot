@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-// Safely access Vite environment variables or Node/fallback variables
-const elevenLabsApiKey = String(import.meta.env.VITE_ELEVENLABS_API_KEY || "") ||
-    (typeof process !== 'undefined' ? process.env.ELEVENLABS_API_KEY || "" : "");
+const env = import.meta.env;
 
-const elevenLabsVoiceId = String(import.meta.env.VITE_ELEVENLABS_VOICE_ID || "pNInz6obpgDQ51u76XYj") ||
-    (typeof process !== 'undefined' ? process.env.ELEVENLABS_VOICE_ID || "pNInz6obpgDQ51u76XYj" : "pNInz6obpgDQ51u76XYj");
+const elevenLabsApiKey = `${env.VITE_ELEVENLABS_API_KEY}`;
+
+const elevenLabsVoiceId = `${env.VITE_ELEVENLABS_VOICE_ID}`;
 
 let whiskerionIntroPlayed = false;
 

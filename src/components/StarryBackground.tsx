@@ -1,5 +1,5 @@
-// Generate static list of 100 stars for the entire viewport background
-const stars = Array.from({ length: 100 }).map((_, index) => {
+// Generate static list of 60 stars for the entire viewport background
+const stars = Array.from({ length: 60 }).map((_, index) => {
     const size = Math.random() * 2.5 + 1; // 1px to 3.5px
     const top = Math.random() * 100;
     const left = Math.random() * 100;
@@ -18,8 +18,8 @@ const stars = Array.from({ length: 100 }).map((_, index) => {
     };
 });
 
-// Generate static list of 5 meteors for the entire viewport background
-const meteors = Array.from({ length: 5 }).map((_, index) => {
+// Generate static list of 3 meteors for the entire viewport background
+const meteors = Array.from({ length: 3 }).map((_, index) => {
     const top = Math.random() * 50; // 0% to 50% from top
     const duration = Math.random() * 2 + 3; // 3s to 5s travel time
     const delay = Math.random() * 15; // 0s to 15s delay

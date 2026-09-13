@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@elevenlabs/elevenlabs-js": "^2.49.1",
-    "@google/genai": "^2.6.0",
     "@hexclave/react": "^1.0.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
@@ -22,7 +21,7 @@
     "@rolldown/plugin-babel": "^0.2.3",
     "@tailwindcss/vite": "^4.3.0",
     "@types/babel__core": "^7.20.5",
-    "@types/node": "^24.12.3",
+    "@types/node": "^24.13.4",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.0.1",
