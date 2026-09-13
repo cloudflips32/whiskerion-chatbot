@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ChatPage } from './pages/ChatPage';
 import { StarryBackground } from './components/StarryBackground';
 import './App.css';
 
 function App() {
-    const [currentRoute, setCurrentRoute] = useState(window.location.hash);
-
     useEffect(() => {
         const handleHashChange = () => {
-            setCurrentRoute(window.location.hash);
+            // Route changes are handled by the ChatPage via the hash.
         };
         window.addEventListener('hashchange', handleHashChange);
         return () => window.removeEventListener('hashchange', handleHashChange);
